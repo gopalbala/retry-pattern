@@ -1,8 +1,13 @@
 package com.gb.patterns.retyrpattern;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import static com.gb.patterns.retyrpattern.Constants.FAILURE;
+import static com.gb.patterns.retyrpattern.Constants.SUCCESS;
 
 @Slf4j
+@Component
 public class SimpleRetry {
 
     public String doRemoteCall() {
@@ -18,9 +23,9 @@ public class SimpleRetry {
 
         } while (currentAttempt < maxRetries);
         if (currentAttempt == maxRetries) {
-            return "failure";
+            return FAILURE;
         }
-        return "success";
+        return SUCCESS;
     }
 
     private void someServiceCall(int num) throws Exception {
