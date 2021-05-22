@@ -1,4 +1,4 @@
-package com.gb.patterns.retyrpattern;
+package com.gb.patterns.retyrpattern.constants;
 
 public class Constants {
     public static final String FAILURE = "failure";

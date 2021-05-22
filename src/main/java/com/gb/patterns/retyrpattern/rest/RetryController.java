@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-import static com.gb.patterns.retyrpattern.Constants.FAILURE;
+import static com.gb.patterns.retyrpattern.constants.Constants.FAILURE;
 
 @RestController
 @RequestMapping("/api/v1/retry-pattern")
@@ -21,7 +21,7 @@ public class RetryController {
         this.simpleRetry = simpleRetry;
     }
 
-    @RequestMapping(path = "/simple", method = RequestMethod.POST)
+    @RequestMapping(path = "/simple", method = RequestMethod.POST, consumes = {"application/json"})
     public ResponseEntity<?> simpleRetry(@RequestBody Map<?, ?> params) {
         String result = simpleRetry.doRemoteCall();
         if (FAILURE.equalsIgnoreCase(result))

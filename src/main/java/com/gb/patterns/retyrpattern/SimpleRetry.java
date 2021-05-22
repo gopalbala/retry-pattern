@@ -3,8 +3,8 @@ package com.gb.patterns.retyrpattern;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import static com.gb.patterns.retyrpattern.Constants.FAILURE;
-import static com.gb.patterns.retyrpattern.Constants.SUCCESS;
+import static com.gb.patterns.retyrpattern.constants.Constants.FAILURE;
+import static com.gb.patterns.retyrpattern.constants.Constants.SUCCESS;
 
 @Slf4j
 @Component
@@ -16,6 +16,7 @@ public class SimpleRetry {
         do {
             try {
                 someServiceCall(currentAttempt);
+                return SUCCESS;
             } catch (Exception e) {
                 log.error("upstream failure");
                 currentAttempt++;
