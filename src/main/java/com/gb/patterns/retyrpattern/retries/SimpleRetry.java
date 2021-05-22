@@ -1,4 +1,4 @@
-package com.gb.patterns.retyrpattern;
+package com.gb.patterns.retyrpattern.retries;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
