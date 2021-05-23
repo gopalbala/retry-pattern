@@ -1,6 +1,6 @@
 package com.gb.patterns.retyrpattern.rest;
 
-import com.gb.patterns.retyrpattern.retries.RetryWithBackoff;
+import com.gb.patterns.retyrpattern.retries.RetryWithDelay;
 import com.gb.patterns.retyrpattern.retries.SimpleRetry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,11 @@ import static com.gb.patterns.retyrpattern.constants.Constants.FAILURE;
 @RequestMapping("/api/v1/retry-pattern")
 public class RetryController {
     private final SimpleRetry simpleRetry;
-    private final RetryWithBackoff retryWithBackoff;
+    private final RetryWithDelay retryWithDelay;
 
-    public RetryController(SimpleRetry simpleRetry, RetryWithBackoff retryWithBackoff) {
+    public RetryController(SimpleRetry simpleRetry, RetryWithDelay retryWithDelay) {
         this.simpleRetry = simpleRetry;
-        this.retryWithBackoff = retryWithBackoff;
+        this.retryWithDelay = retryWithDelay;
     }
 
     @RequestMapping(path = "/simple", method = RequestMethod.POST, consumes = {"application/json"})
@@ -36,7 +36,7 @@ public class RetryController {
     public ResponseEntity<?> backedOffRetry(@RequestBody Map<?, ?> params) {
         String result = null;
         try {
-            result = retryWithBackoff.doRemoteCall();
+            result = retryWithDelay.doRemoteCall();
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
