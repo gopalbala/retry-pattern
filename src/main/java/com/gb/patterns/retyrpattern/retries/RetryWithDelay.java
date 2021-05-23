@@ -11,10 +11,11 @@ import static com.gb.patterns.retyrpattern.constants.Constants.SUCCESS;
 
 @Component
 @Slf4j
-public class RetryWithBackoff {
+public class RetryWithDelay {
 
-    @Retryable(value = {Exception.class}, maxAttempts = 3, backoff = @Backoff(delay = 1000))
-    public String doRemoteCall() throws Exception{
+    @Retryable(value = {Exception.class}, maxAttempts = 3,
+            backoff = @Backoff(delay = 1000))
+    public String doRemoteCall() throws Exception {
         Random random = new Random();
         int i = random.nextInt();
         someServiceCall(i);
