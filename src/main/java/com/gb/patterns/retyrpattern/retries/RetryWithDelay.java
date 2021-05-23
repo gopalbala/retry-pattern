@@ -13,7 +13,7 @@ import static com.gb.patterns.retyrpattern.constants.Constants.SUCCESS;
 @Slf4j
 public class RetryWithDelay {
 
-    @Retryable(value = {Exception.class}, maxAttempts = 3,
+    @Retryable(value = {Exception.class}, maxAttempts = 5,
             backoff = @Backoff(delay = 1000))
     public String doRemoteCall() throws Exception {
         Random random = new Random();
@@ -26,6 +26,7 @@ public class RetryWithDelay {
         if (num % 3 == 0) {
             return;
         } else {
+            log.error("failure");
             throw new Exception("simulating failure");
         }
     }
